@@ -4,7 +4,8 @@ import './Message.css';
 
 function Message({message, username}) {
     const isUser = username === message.username;
-    console.log('isUser', isUser)
+    // console.log('isUser', isUser)
+    
     return (
         <div className={`message__card ${isUser && 'message__card__user'}`}>
             <Card className={isUser ? 'message__user' : 'message__guest'}>

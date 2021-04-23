@@ -3,15 +3,28 @@ import './App.css';
 import Button from '@material-ui/core/Button'
 import { FormControl, Input, InputLabel } from '@material-ui/core';
 import Message from './Message';
+import db from './firebase'
+import firebase from 'firebase'
 
 function App() {
   const [input, setInput] = React.useState('');
   const [messages, setMessages] = React.useState([]);
-  const [username, setUserName] = React.useState('');
+  const [username, setUserName] = React.useState('Yaw');
 
   React.useEffect(() => {
-    setUserName(prompt('Please enter your name'))
+    db.collection('messages')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot(snapshot => {
+        // console.log('data', snapshot.docs.map(doc => doc.data()))
+        setMessages(snapshot.docs.map(doc => doc.data()))
+      })
   }, [])
+
+  React.useEffect(() => {
+    if (!username) {
+      setUserName(prompt('Please enter your name'))
+    }
+  }, [username])
 
   const handleChange = function(event) {
     setInput(event.target.value)
@@ -19,7 +32,13 @@ function App() {
 
   const sendMessage = function(event) {
     event.preventDefault();
-    setMessages([...messages, {'text': input, 'username': username}]);
+
+    db.collection('messages').add({
+      text: input,
+      username: username,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
+
     setInput('');
   }
 
