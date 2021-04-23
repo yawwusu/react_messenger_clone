@@ -7,6 +7,11 @@ import Message from './Message';
 function App() {
   const [input, setInput] = React.useState('');
   const [messages, setMessages] = React.useState([]);
+  const [username, setUserName] = React.useState('');
+
+  React.useEffect(() => {
+    setUserName(prompt('Please enter your name'))
+  }, [])
 
   const handleChange = function(event) {
     setInput(event.target.value)
@@ -14,7 +19,7 @@ function App() {
 
   const sendMessage = function(event) {
     event.preventDefault();
-    setMessages([...messages, input]);
+    setMessages([...messages, {'text': input, 'username': username}]);
     setInput('');
   }
 
@@ -22,6 +27,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Facebook Messenger Clone</h1>
+        <p>Welcome {username}</p>
       </header>
       <main className="App-body">
         <form>
@@ -34,7 +40,7 @@ function App() {
 
         {
           messages.map(message => (
-            <Message message={message} />
+            <Message message={message} username={username} />
           ))
         }
       </main>
