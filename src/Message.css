@@ -2,11 +2,11 @@
     padding: 0.1rem 1rem;
     margin: 1rem;
     width: fit-content;   
-    text-align: right;
 }
 
 .message__card__user {
-    text-align: left !important;
+    margin-left: auto;
+    text-align: right !important;
 }
 
 .message__user {

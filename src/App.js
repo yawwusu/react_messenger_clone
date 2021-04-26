@@ -5,18 +5,19 @@ import { FormControl, Input, InputLabel } from '@material-ui/core';
 import Message from './Message';
 import db from './firebase'
 import firebase from 'firebase'
+import FlipMove from 'react-flip-move'
 
 function App() {
   const [input, setInput] = React.useState('');
   const [messages, setMessages] = React.useState([]);
-  const [username, setUserName] = React.useState('Yaw');
+  const [username, setUserName] = React.useState('');
 
   React.useEffect(() => {
     db.collection('messages')
       .orderBy('timestamp', 'desc')
       .onSnapshot(snapshot => {
         // console.log('data', snapshot.docs.map(doc => doc.data()))
-        setMessages(snapshot.docs.map(doc => doc.data()))
+        setMessages(snapshot.docs.map(doc => ({'id': doc.id, 'data': doc.data()})))
       })
   }, [])
 
@@ -57,11 +58,13 @@ function App() {
           <Button disabled={!input} variant='contained' color='primary' type='submit' onClick={sendMessage}>Send Message</Button>
         </form>
 
-        {
-          messages.map(message => (
-            <Message message={message} username={username} />
-          ))
-        }
+        <FlipMove>
+          {
+            messages.map(message => (
+              <Message key={message.id} message={message.data} username={username} />
+            ))
+          }
+        </FlipMove>
       </main>
     </div>
   );
