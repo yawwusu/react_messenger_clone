@@ -10,9 +10,9 @@
 }
 
 .message__user {
-    background-color: blue !important;
+    background-color: rgb(16, 136, 235) !important;
 }
 
 .message__guest {
-    background-color: darkgray !important;
+    background-color: rgb(247, 243, 243) !important;
 }

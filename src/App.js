@@ -1,11 +1,12 @@
 import React from 'react'
 import './App.css';
-import Button from '@material-ui/core/Button'
 import { FormControl, Input, InputLabel } from '@material-ui/core';
 import Message from './Message';
-import db from './firebase'
-import firebase from 'firebase'
-import FlipMove from 'react-flip-move'
+import db from './firebase';
+import firebase from 'firebase';
+import FlipMove from 'react-flip-move';
+import SendIcon from '@material-ui/icons/Send';
+import { IconButton } from '@material-ui/core'
 
 function App() {
   const [input, setInput] = React.useState('');
@@ -46,16 +47,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <img src="https://facebookbrand.com/wp-content/uploads/2018/09/Header-e1538151782912.png?w=100&h=100" alt="logo" />
         <h1>Facebook Messenger Clone</h1>
         <p>Welcome {username}</p>
       </header>
       <main className="App-body">
-        <form>
-          <FormControl>
-            <InputLabel htmlFor="message">Enter a message</InputLabel>
-            <Input value={input} onChange={handleChange} id="message" aria-describedby="message-helper-text" />
+        <form className="App-form">
+          <FormControl className="App-formcontrol">
+            <Input className="App-input" placeholder="Enter a message" value={input} onChange={handleChange} id="message" aria-describedby="message-helper-text" />
+            <IconButton className="App-iconButton" disabled={!input} variant='contained' color='primary' type='submit' onClick={sendMessage}>
+              <SendIcon />
+            </IconButton>
           </FormControl>
-          <Button disabled={!input} variant='contained' color='primary' type='submit' onClick={sendMessage}>Send Message</Button>
         </form>
 
         <FlipMove>

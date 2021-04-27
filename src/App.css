@@ -16,3 +16,26 @@
 .App-body {
   margin-top: 1rem;
 }
+
+.App-form {
+  padding: 2rem;
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  background-color: #e9e9eb;
+  width: 90%;
+  margin: 0.5rem;
+}
+
+.App-formcontrol {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.App-input {
+  flex: 1;
+}
+
+.App-iconButton {
+  flex: 0;
+}
