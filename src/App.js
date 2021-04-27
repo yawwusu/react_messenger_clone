@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import { FormControl, Input, InputLabel } from '@material-ui/core';
+import { FormControl, Input } from '@material-ui/core';
 import Message from './Message';
 import db from './firebase';
 import firebase from 'firebase';
@@ -46,7 +46,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
         <img src="https://facebookbrand.com/wp-content/uploads/2018/09/Header-e1538151782912.png?w=100&h=100" alt="logo" />
         <h1>Facebook Messenger Clone</h1>
         <p>Welcome {username}</p>
